@@ -90,3 +90,41 @@
 # l_num = int(input("Enter your last number: "))
 # print(f"The result of your calculation is: {operation(f_num,l_num)}")
 
+from turtle import Turtle, Screen
+import random
+
+colours = ["red", "orange", "yellow", "green", "blue", "purple"]
+
+screen = Screen()
+screen.setup(width=600, height=400)
+screen.bgcolor("lightgray")
+
+turtles = []
+for x in range(6):
+    turtle_x = Turtle(shape="turtle")
+    turtle_x.penup()
+    turtle_x.color(colours[x])
+    turtle_x.goto(x=-280, y=(-130 + (x*50)))
+    turtles.append(turtle_x)
+
+is_race_on = False
+user_bet = screen.textinput(title="Make your bet", prompt="Which turtle will win? Enter a colour: ")
+
+if user_bet:
+    is_race_on = True
+
+while is_race_on:
+
+    for turtle in turtles:
+        if turtle.xcor() >= 280:
+            is_race_on = False
+            winning_colour = turtle.pencolor()
+            if winning_colour == user_bet:
+                print(f"You've won! The {winning_colour} turtle is the winner!")
+            else:
+                print(f"You've lost! The {winning_colour} turtle is the winner!")
+        turtle.forward(random.randint(0,10))
+
+
+
+# screen.exitonclick()
